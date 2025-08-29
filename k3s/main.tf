@@ -11,3 +11,7 @@ provider "kubernetes" {
   config_path = "~/.kube/k3s-homelab/config"
 }
 
+
+module "vaultwarden" {
+  source = "../modules/vultwarden"
+}
