@@ -7,10 +7,10 @@ terraform {
   }
 }
 
-provider "kubernetes" {
-  config_path = "~/.kube/k3s-homelab/config"
+module "nginx_ingress" {
+  source       = "./modules/nginx-ingress"
+  vaultwarden_namespace = module.vaultwarden.namespace
 }
-
 
 module "vaultwarden" {
   source = "../modules/vultwarden"
