@@ -31,7 +31,7 @@ resource "kubernetes_ingress_v1" "vaultwarden" {
     }
 
     rule {
-      host = var.ingress_host_name
+      host = "vaultwarden.${var.ingress_host_name}"
       http {
         path {
           path     = "/"
