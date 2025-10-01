@@ -24,3 +24,29 @@ resource "kubernetes_persistent_volume_claim" "vaultwarden" {
   }
 
 }
+
+
+resource "kubernetes_persistent_volume" "vaultwarden" {
+  metadata {
+    name = "vaultwarden-pv"
+    labels = {
+      type = "local"
+    }
+  }
+
+  spec {
+    capacity = {
+      storage = "1Gi"
+    }
+    access_modes = ["ReadWriteOnce"]
+    storage_class_name = "manual"
+    persistent_volume_reclaim_policy = "Retain"
+
+    persistent_volume_source {
+      host_path {
+        path = "/mnt/vaultwarden-data"
+        type = "DirectoryOrCreate"
+      }
+    }
+  }
+}
