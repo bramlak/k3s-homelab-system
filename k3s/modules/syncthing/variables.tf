@@ -51,3 +51,9 @@ variable "storage_size" {
   type = string
   default = "1Gi"
 }
+
+variable "service_port" {
+  description = "Service port for Syncthing"
+  type        = number
+  default     = 80
+}
