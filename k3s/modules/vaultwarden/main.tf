@@ -104,7 +104,7 @@ resource "kubernetes_deployment" "vaultwarden" {
 
           env {
             name  = "DOMAIN"
-            value = "https://${var.ingress_host}:${var.ingress_port}"
+            value = "https://${var.ingress_host_name}:${var.ingress_port}"
           }
 
           resources {

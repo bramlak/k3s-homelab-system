@@ -28,10 +28,9 @@ variable "ingress_port" {
   default     = 30080
 }
 
-variable "ingress_host" {
+variable "ingress_host_name" {
   description = "Hostname for the Ingress controller"
   type        = string
-  default     = "cirrus"
 }
 
 variable "cpu_request" {
