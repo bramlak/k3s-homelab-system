@@ -57,3 +57,9 @@ variable "memory_limit" {
   type        = string
   default     = "512Mi"
 }
+
+variable "service_port" {
+  description = "Service port for Vaultwarden"
+  type        = number
+  default     = 80
+}
