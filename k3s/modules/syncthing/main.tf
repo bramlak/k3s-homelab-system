@@ -131,3 +131,34 @@ resource "kubernetes_deployment" "syncthing" {
   }
 }
 
+resource "kubernetes_service" "syncthing" {
+  metadata {
+    name      = "syncthing"
+    namespace = kubernetes_namespace.syncthing.metadata[0].name
+  }
+
+  spec {
+    selector = {
+      app = "syncthing"
+    }
+
+    port {
+      name        = "http"
+      port        = var.service_port
+      target_port = 8384
+    }
+    port {
+      name        = "sync"
+      port        = 22000
+      target_port = 22000
+    }
+    port {
+      name        = "discovery"
+      port        = 21027
+      target_port = 21027
+      protocol    = "UDP"
+    }
+
+    type = "ClusterIP"
+  }
+}
