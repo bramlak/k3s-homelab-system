@@ -31,7 +31,7 @@ resource "kubernetes_ingress_v1" "vaultwarden" {
     }
 
     rule {
-      host = "cirrus"
+      host = var.ingress_host_name
       http {
         path {
           path     = "/"
@@ -40,7 +40,7 @@ resource "kubernetes_ingress_v1" "vaultwarden" {
             service {
               name = "vaultwarden"
               port {
-                number = 80
+                number = var.vaultwarden_service_port
               }
             }
           }
