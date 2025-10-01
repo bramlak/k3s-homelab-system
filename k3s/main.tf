@@ -26,5 +26,4 @@ module "vaultwarden" {
 
 module "syncthing" {
   source            = "./modules/syncthing"
-  ingress_host_name = var.ingress_host_name
 }
