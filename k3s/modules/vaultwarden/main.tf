@@ -50,3 +50,90 @@ resource "kubernetes_persistent_volume" "vaultwarden" {
     }
   }
 }
+
+
+
+
+resource "kubernetes_deployment" "vaultwarden" {
+  metadata {
+    name      = "vaultwarden"
+    namespace = kubernetes_namespace.vaultwarden.metadata[0].name
+    labels = {
+      app = "vaultwarden"
+    }
+  }
+
+  spec {
+    replicas = var.replicas
+    selector {
+      match_labels = {
+        app = "vaultwarden"
+      }
+    }
+
+    template {
+      metadata {
+        labels = {
+          app = "vaultwarden"
+        }
+      }
+
+      spec {
+        container {
+          name  = "vaultwarden"
+          image = "vaultwarden/server:${var.image_version}"
+
+          volume_mount {
+            name = "vaultwarden-data"
+            mount_path = "/data"
+          }
+
+          port {
+            container_port = 80
+          }
+
+          env {
+            name  = "ADMIN_TOKEN"
+            value = var.admin_token
+          }
+
+          env {
+            name  = "WEBSOCKET_ENABLED"
+            value = "true"
+          }
+
+          env {
+            name  = "DOMAIN"
+            value = "https://${var.ingress_host}:${var.ingress_port}"
+          }
+
+          resources {
+            requests = {
+              cpu    = var.cpu_request
+              memory = var.memory_request
+            }
+            limits = {
+              cpu    = var.cpu_limit
+              memory = var.memory_limit
+            }
+          }
+
+          liveness_probe {
+            http_get {
+              path = "/alive"
+              port = 80
+            }
+            initial_delay_seconds = 15
+            period_seconds        = 10
+          }
+        }
+        volume {
+          name = "vaultwarden-data"
+          persistent_volume_claim {
+            claim_name = kubernetes_persistent_volume_claim.vaultwarden.metadata[0].name
+          }
+        }
+      }
+    }
+  }
+}
