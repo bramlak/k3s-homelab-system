@@ -8,10 +8,12 @@ terraform {
 }
 
 module "nginx_ingress" {
-  source       = "./modules/nginx-ingress"
-  vaultwarden_namespace = module.vaultwarden.namespace
+  source                   = "./modules/nginx-ingress"
+  vaultwarden_namespace    = module.vaultwarden.namespace
   vaultwarden_service_port = module.vaultwarden.service_port
-  ingress_host_name = var.ingress_host_name
+  syncthing_namespace      = module.syncthing.namespace
+  syncthing_service_port   = module.syncthing.service_port
+  ingress_host_name        = var.ingress_host_name
 }
 
 module "vaultwarden" {
