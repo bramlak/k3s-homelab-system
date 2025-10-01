@@ -13,7 +13,7 @@ module "nginx_ingress" {
 }
 
 module "vaultwarden" {
-  source = "../modules/vaultwarden"
+  source = "./modules/vaultwarden"
   namespace      = var.namespace
   image_version  = var.image_version
   replicas       = var.replicas
