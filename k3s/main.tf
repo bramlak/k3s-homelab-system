@@ -17,9 +17,14 @@ module "nginx_ingress" {
 }
 
 module "vaultwarden" {
-  source = "./modules/vaultwarden"
-  admin_token    = var.admin_token
-  ingress_host_name   = var.ingress_host_name
-  tls_crt        = var.tls_crt
-  tls_key        = var.tls_key
+  source            = "./modules/vaultwarden"
+  admin_token       = var.admin_token
+  ingress_host_name = var.ingress_host_name
+  tls_crt           = var.tls_crt
+  tls_key           = var.tls_key
+}
+
+module "syncthing" {
+  source            = "./modules/syncthing"
+  ingress_host_name = var.ingress_host_name
 }
