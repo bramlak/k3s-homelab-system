@@ -158,3 +158,15 @@ resource "kubernetes_service" "vaultwarden" {
     type = "ClusterIP"
   }
 }
+
+resource "kubernetes_secret" "vaultwarden_tls" {
+  metadata {
+    name      = "vaultwarden-tls"
+    namespace = kubernetes_namespace.vaultwarden.metadata[0].name
+  }
+  data = {
+    "tls.crt" = base64encode(var.tls_crt)
+    "tls.key" = base64encode(var.tls_key)
+  }
+  type = "kubernetes.io/tls"
+}
