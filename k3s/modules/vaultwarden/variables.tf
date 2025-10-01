@@ -63,3 +63,15 @@ variable "service_port" {
   type        = number
   default     = 80
 }
+
+variable "tls_crt" {
+  description = "TLS certificate for Vaultwarden (contents of tls.crt)"
+  type        = string
+  sensitive   = true
+}
+
+variable "tls_key" {
+  description = "TLS private key for Vaultwarden (contents of tls.key)"
+  type        = string
+  sensitive   = true
+}
