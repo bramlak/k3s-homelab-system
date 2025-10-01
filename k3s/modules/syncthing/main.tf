@@ -93,12 +93,6 @@ resource "kubernetes_deployment" "syncthing" {
             protocol      = "UDP"
           }
 
-          env_from {
-            secret_ref {
-              name = kubernetes_secret.syncthing.metadata[0].name
-            }
-          }
-
           resources {
             requests = {
               cpu    = var.cpu_request
