@@ -50,3 +50,35 @@ resource "kubernetes_ingress_v1" "vaultwarden" {
   }
 }
 
+
+resource "kubernetes_ingress_v1" "syncthing" {
+  metadata {
+    name      = "syncthing"
+    namespace = var.syncthing_namespace
+    annotations = {
+      "kubernetes.io/ingress.class" = "nginx"
+    }
+  }
+
+  spec {
+    ingress_class_name = "nginx"
+
+    rule {
+      host = "syncthing.${var.ingress_host_name}"
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = "syncthing"
+              port {
+                number = var.syncthing_service_port
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
