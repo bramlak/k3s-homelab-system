@@ -137,3 +137,24 @@ resource "kubernetes_deployment" "vaultwarden" {
     }
   }
 }
+
+
+resource "kubernetes_service" "vaultwarden" {
+  metadata {
+    name      = "vaultwarden"
+    namespace = kubernetes_namespace.vaultwarden.metadata[0].name
+  }
+
+  spec {
+    selector = {
+      app = "vaultwarden"
+    }
+
+    port {
+      port        = var.service_port
+      target_port = 80
+    }
+
+    type = "ClusterIP"
+  }
+}
