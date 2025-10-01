@@ -7,3 +7,8 @@ output "namespace" {
   value       = kubernetes_namespace.vaultwarden.metadata[0].name
   description = "Vaultwarden namespace"
 }
+
+output "vaultwarden_tls_secret_name" {
+  value = kubernetes_secret.vaultwarden_tls.metadata[0].name
+  description = "Name of the Vaultwarden TLS secret"
+}
