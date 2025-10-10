@@ -133,3 +133,23 @@ resource "kubernetes_deployment" "grafana" {
     }
   }
 }
+
+resource "kubernetes_service" "grafana" {
+  metadata {
+    name      = "grafana"
+    namespace = kubernetes_namespace.grafana.metadata[0].name
+  }
+
+  spec {
+    selector = {
+      app = "grafana"
+    }
+
+    port {
+      port        = var.service_port
+      target_port = 3000
+    }
+
+    type = "ClusterIP"
+  }
+}
