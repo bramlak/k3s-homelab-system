@@ -1,4 +1,4 @@
-variable "admin_token" {
+variable "vaultwarden_admin_token" {
   type        = string
   sensitive   = true
   description = "Vaultwarden admin token"
