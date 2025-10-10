@@ -51,3 +51,14 @@ variable "memory_limit" {
   type        = string
   default     = "512Mi"
 }
+
+variable "ingress_host_name" {
+  description = "Hostname for the Ingress controller"
+  type        = string
+}
+
+variable "service_port" {
+  description = "Service port for Grafana"
+  type        = number
+  default     = 3000
+}
