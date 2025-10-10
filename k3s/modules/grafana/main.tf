@@ -166,3 +166,36 @@ resource "kubernetes_secret" "grafana_admin" {
 
   type = "Opaque"
 }
+
+
+resource "kubernetes_ingress_v1" "grafana" {
+  metadata {
+    name      = "grafana"
+    namespace = kubernetes_namespace.grafana.metadata[0].name
+    annotations = {
+      "kubernetes.io/ingress.class" = "nginx"
+    }
+  }
+
+  spec {
+    ingress_class_name = "nginx"
+
+    rule {
+      host = "grafana.${var.ingress_host_name}"
+      http {
+        path {
+          path      = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = "grafana"
+              port {
+                number = var.service_port
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
