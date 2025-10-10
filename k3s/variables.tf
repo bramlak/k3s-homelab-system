@@ -1,4 +1,4 @@
-variable "admin_token" {
+variable "vaultwarden_admin_token" {
   type        = string
   sensitive   = true
   description = "Vaultwarden admin token"
@@ -20,4 +20,10 @@ variable "tls_key" {
 variable "ingress_host_name" {
   description = "Hostname for the Ingress controller"
   type        = string
+}
+
+variable "grafana_admin_password" {
+  type = string
+  sensitive = true
+  description = "grafana admin password"
 }
