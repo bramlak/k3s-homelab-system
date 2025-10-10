@@ -1,4 +1,4 @@
-admin_token  = "your-admin-token"
+grafana_admin_password = "your-grafana-admin-token"
 ingress_host_name = "your-ingress-host-name"
 tls_crt = <<EOT
 -----BEGIN CERTIFICATE-----

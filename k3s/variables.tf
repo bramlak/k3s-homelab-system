@@ -21,3 +21,9 @@ variable "ingress_host_name" {
   description = "Hostname for the Ingress controller"
   type        = string
 }
+
+variable "grafana_admin_password" {
+  type = string
+  sensitive = true
+  description = "grafana admin password"
+}
