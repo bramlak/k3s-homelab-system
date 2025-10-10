@@ -27,3 +27,9 @@ module "vaultwarden" {
 module "syncthing" {
   source            = "./modules/syncthing"
 }
+
+module "grafana" {
+  source = "./modules/grafana"
+  admin_password = var.grafana_admin_password
+  ingress_host_name = var.ingress_host_name
+}
