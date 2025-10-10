@@ -153,3 +153,16 @@ resource "kubernetes_service" "grafana" {
     type = "ClusterIP"
   }
 }
+
+resource "kubernetes_secret" "grafana_admin" {
+  metadata {
+    name      = "grafana-admin"
+    namespace = kubernetes_namespace.grafana.metadata[0].name
+  }
+
+  data = {
+    admin_password = var.admin_password
+  }
+
+  type = "Opaque"
+}
