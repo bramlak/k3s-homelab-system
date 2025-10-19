@@ -34,11 +34,19 @@ This project sets up a lightweight Kubernetes cluster using k3s. It runs on ARM6
 | Services | Vaultwarden, Syncthing, Grafana, NGINX Ingress |
 | VPN | [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/) [![WireGuard](https://img.shields.io/badge/WireGuard-88171A?style=for-the-badge&logo=wireguard&logoColor=white)](https://www.wireguard.com/) |
 
+## Tech Stack
+
+| Category | Technologies |
+|----------|--------------|
+| Infrastructure | <a href="https://www.terraform.io/"><img src="https://www.datocms-assets.com/2885/1731373310-terraform_white.svg" alt="Terraform" width="100"></a> <a href="https://k3s.io/"><img src="https://k3s.io/img/k3s-logo-light.svg" alt="k3s" width="100"></a> |
+| Services | <a href="https://github.com/dani-garcia/vaultwarden"><img src="https://raw.githubusercontent.com/dani-garcia/vaultwarden/main/resources/vaultwarden-logo-auto.svg" alt="Vaultwarden" width="100"></a> <a href="https://syncthing.net/"><img src="https://raw.githubusercontent.com/syncthing/syncthing/main/assets/logo-horizontal.svg" alt="Syncthing" width="100"></a> <a href="https://grafana.com/"><img src="https://raw.githubusercontent.com/grafana/grafana/main/docs/logo-horizontal.png" alt="Grafana" width="100"></a> <a href="https://github.com/kubernetes/ingress-nginx"><img src="https://nginx.org/img/nginx_logo_dark.svg" alt="NGINX Ingress" width="100"></a> |
+| VPN | <a href="https://www.wireguard.com/"><img src="https://www.wireguard.com/img/wireguard.svg" alt="WireGuard" width="100"></a>
+
 ## Prerequisites
 
 Install these on your local machine:
 
-- [Terraform](https://www.terraform.io/downloads) (version 1.0 or later).
+- [Terraform](https://www.terraform.io/downloads).
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 - SSH client.
 
@@ -61,9 +69,10 @@ Copy `.pub` file content in the next step.
 
 ### OS Setup
 
-Download [Raspberry Pi OS Lite (64-bit)](https://www.raspberrypi.com/software/operating-systems/) (Debian Bookworm or later). This example uses the headless version.
-
 Flash the image to the SD card with [Raspberry Pi Imager](https://www.raspberrypi.com/software/).
+
+Choose `Raspberry Pi OS Lite (64-bit)`
+This example uses the headless version.
 
 In the imager, go to `Edit settings > General`.
 Set hostname (e.g., `cirrus.local`)
@@ -147,7 +156,7 @@ sudo kubectl get nodes
 On local machine, copy kubeconfig:
 
 ```
-ssh -i ~/.ssh/ibis-cirrus user@hostname  "sudo cat /etc/rancher/k3s/k3s.yaml" > ~/.kube/config
+ssh -i ~/.ssh/ibis-cirrus ibis@cirrus  "sudo cat /etc/rancher/k3s/k3s.yaml" > ~/.kube/config
 ```
 
 Update server URL:
@@ -236,12 +245,13 @@ sudo sysctl -p
 
 Use `wireguard-docker-compose.yml` from repository.
 
-Get `puid` and `pgid`:
+Get `puid` and `pgid` values:
 
 ```
 id -u
 id -g
 ```
+
 Tailor `wireguard-docker-compose.yml` via changing `puid` and `pgid`.
 
 Allow ipv4 packet forwarding via editing `/etc/sysctl.conf`:
