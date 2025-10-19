@@ -26,13 +26,6 @@ A Terraform configuration for a k3s-based homelab.
 
 This project sets up a lightweight Kubernetes cluster using k3s. It runs on ARM64 hardware. The example uses a Raspberry Pi 4B. Terraform deploys services like Vaultwarden, Syncthing, Grafana, and NGINX Ingress. The setup includes a single-node cluster. It focuses on home use.
 
-## Tech Stack
-
-| Category | Technologies |
-|----------|--------------|
-| Infrastructure | [![Terraform](https://img.shields.io/badge/Terraform-844FBA?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/) [![k3s](https://img.shields.io/badge/k3s-FFC61E?style=for-the-badge&logo=k3s&logoColor=black)](https://k3s.io/) |
-| Services | Vaultwarden, Syncthing, Grafana, NGINX Ingress |
-| VPN | [![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/) [![WireGuard](https://img.shields.io/badge/WireGuard-88171A?style=for-the-badge&logo=wireguard&logoColor=white)](https://www.wireguard.com/) |
 
 ## Tech Stack
 
